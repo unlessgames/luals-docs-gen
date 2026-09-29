@@ -103,11 +103,7 @@ fn generate_docs_test(order: OutputOrder, output: &str) -> Result<(), Error> {
 }
 
 #[test]
-fn generate_test_docs_by_class() -> Result<(), Error> {
-    generate_docs_test(OutputOrder::ByClass, "./test/by_class/src")
-}
-
-#[test]
-fn generate_test_docs_by_file() -> Result<(), Error> {
+fn generate_test_docs() -> Result<(), Error> {
+    generate_docs_test(OutputOrder::ByClass, "./test/by_class/src")?;
     generate_docs_test(OutputOrder::ByFile, "./test/by_file/src")
 }
