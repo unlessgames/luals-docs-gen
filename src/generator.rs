@@ -90,14 +90,24 @@ pub fn generate_docs(options: &Options) -> Result<(), Error> {
     Ok(())
 }
 
-#[test]
-fn generate_test_docs() -> Result<(), Error> {
+#[cfg(test)]
+fn generate_docs_test(order: OutputOrder, output: &str) -> Result<(), Error> {
     use std::path::PathBuf;
     generate_docs(&Options {
         library: PathBuf::from("./test/definitions/library"),
-        output: PathBuf::from("./test/src"),
+        output: PathBuf::from(output),
         excluded_classes: vec![],
-        order: OutputOrder::ByClass,
+        order,
         namespace: "acme".to_string(),
     })
+}
+
+#[test]
+fn generate_test_docs_by_class() -> Result<(), Error> {
+    generate_docs_test(OutputOrder::ByClass, "./test/by_class/src")
+}
+
+#[test]
+fn generate_test_docs_by_file() -> Result<(), Error> {
+    generate_docs_test(OutputOrder::ByFile, "./test/by_file/src")
 }
